@@ -1,22 +1,28 @@
 {
   "name": "image-steam-gcs",
   "version": "1.0.0",
-  "description": "Google Cloud Storage client for Image Steam: https://github.com/asilvas/node-image-steam",
+  "description": "GCP Storage client for Image Steam: https://github.com/asilvas/node-image-steam",
   "main": "index.js",
+  "dependencies": {
+    "@google-cloud/storage": "^5.15.3",
+    "image-steam": ">=0.59.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/deanboonzaier/image-steam-gcs.git"
   },
+  "keywords": [
+    "image-steam",
+    "gcs"
+  ],
   "author": "Dean Boonzaier",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/deanboonzaier/image-steam-gcs/issues"
   },
-  "homepage": "https://github.com/deanboonzaier/image-steam-gcs#readme",
-  "dependencies": {
-    "@google-cloud/storage": "^5.15.3"
-  },
-  "peerDependencies": {
-    "image-steam": ">=0.59.0"
-  }
+  "homepage": "https://github.com/deanboonzaier/image-steam-gcs#readme"
 }
