@@ -1,13 +1,12 @@
 {
   "name": "image-steam-gcs",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "GCP Storage client for Image Steam: https://github.com/asilvas/node-image-steam",
   "main": "index.js",
   "dependencies": {
     "@google-cloud/storage": "^5.15.3",
     "image-steam": ">=0.59.0"
   },
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

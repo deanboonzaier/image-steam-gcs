@@ -1,4 +1,3 @@
-/*jshint esversion: 6 */
 const {Storage} = require('@google-cloud/storage');
 const {storage} = require('image-steam');
 
@@ -11,7 +10,7 @@ module.exports = class StorageGCS extends StorageBase {
         const {bucket, projectId} = opts;
 
         if (!bucket) {
-            throw new Error('bucket is required');
+            throw new Error('StorageGCS.bucket is required');
         }
         this.Bucket = bucket;
 
@@ -24,20 +23,17 @@ module.exports = class StorageGCS extends StorageBase {
         // First check to see if we should load a Service Account file by name (fully qualified path)
         if (opts.serviceAccountKeyFilename) {
             gcsClientParams.keyFilename = opts.serviceAccountKeyFilename;
-            console.log('Authenticating using a Service Account Keyfile');
         }
         // Else check to see if we're using an email/private_key combo
         else if (opts.privateKey) {
 
             if (!opts.clientEmail) {
-                throw new Error('clientEmail is required when privateKey is specified');
+                throw new Error('StorageGCS.clientEmail is required when privateKey is specified');
             }
             gcsClientParams.credentials = {
                 'client_email': opts.clientEmail,
                 'private_key': opts.privateKey,
             }
-
-            console.log('Authenticating using a set of Service Account email and private key credentials');
         }
         // We don't fail at this point simply because the required variables can still be read from the "environment" using Application Default Credentials (ADC) when running in a GCP environment
 
@@ -54,13 +50,13 @@ module.exports = class StorageGCS extends StorageBase {
             .file(originalPath)
             .createReadStream() //Create a stream that we can use to read the file chunks from
             .on('data', (dataChunk) => {
-                // We received a part of the file, store it so we can concatenate it with the rest of the chunks later
+                // We've received a part of the file, store it so we can concatenate it with the rest of the chunks later
                 fileChunks.push(dataChunk);
 
             })
             .on('error', (err) => {
                 return void callback(
-                    new Error('GCP Storage fetch error: ' + err.code + ' for ' + (Bucket + '/' + originalPath))
+                    new Error('StorageGCS.fetch error: ' + err.code + ' for ' + (Bucket + '/' + originalPath))
                 );
             })
             .on('end', () => {
